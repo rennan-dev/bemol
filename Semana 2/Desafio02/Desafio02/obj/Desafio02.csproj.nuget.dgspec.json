@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\19886\\Documents\\Bemol\\Semana 2\\Desafio02\\Desafio02\\Desafio02.csproj": {}
+    "C:\\Users\\Usuário\\Documents\\BEMOL\\bemol\\Semana 2\\Desafio02\\Desafio02\\Desafio02.csproj": {}
   },
   "projects": {
-    "C:\\Users\\19886\\Documents\\Bemol\\Semana 2\\Desafio02\\Desafio02\\Desafio02.csproj": {
+    "C:\\Users\\Usuário\\Documents\\BEMOL\\bemol\\Semana 2\\Desafio02\\Desafio02\\Desafio02.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\19886\\Documents\\Bemol\\Semana 2\\Desafio02\\Desafio02\\Desafio02.csproj",
+        "projectUniqueName": "C:\\Users\\Usuário\\Documents\\BEMOL\\bemol\\Semana 2\\Desafio02\\Desafio02\\Desafio02.csproj",
         "projectName": "Desafio02",
-        "projectPath": "C:\\Users\\19886\\Documents\\Bemol\\Semana 2\\Desafio02\\Desafio02\\Desafio02.csproj",
-        "packagesPath": "C:\\Users\\19886\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\19886\\Documents\\Bemol\\Semana 2\\Desafio02\\Desafio02\\obj\\",
+        "projectPath": "C:\\Users\\Usuário\\Documents\\BEMOL\\bemol\\Semana 2\\Desafio02\\Desafio02\\Desafio02.csproj",
+        "packagesPath": "C:\\Users\\Usuário\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Usuário\\Documents\\BEMOL\\bemol\\Semana 2\\Desafio02\\Desafio02\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\19886\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Usuário\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,7 +22,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -61,7 +60,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
