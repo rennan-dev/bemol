@@ -1,6 +1,8 @@
 ﻿using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Security.Cryptography;
 
+namespace Desafio01.Modelos;
+
 class Cliente {
     public Cliente(string nome, string cpf, string email, string profissao, string telefone, Endereco enderecoCliente) {
         Nome = nome;

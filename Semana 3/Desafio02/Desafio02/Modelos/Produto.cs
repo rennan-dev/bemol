@@ -1,4 +1,6 @@
-﻿class Produto {
+﻿namespace Desafio02.Modelos;
+
+class Produto {
     public string Nome;
     public string Descricao;
     public float PrecoUnitario;
@@ -6,7 +8,7 @@
 
     
 
-    public void VisualizaProduto(List<Produto> produtos) {
+    public virtual void VisualizaProduto(List<Produto> produtos) {
         Console.Clear();
         Console.WriteLine("\n----------------------------------------");
         Console.WriteLine($"Produtos cadastrados:\n");
@@ -21,7 +23,7 @@
         Console.ReadKey();
     }
 
-    public void AdicionaProduto(List<Produto> produtos) {
+    public virtual void AdicionaProduto(List<Produto> produtos) {
         Produto produto = new Produto();
         Console.Clear();
         Console.WriteLine("\n----------------------------------------");

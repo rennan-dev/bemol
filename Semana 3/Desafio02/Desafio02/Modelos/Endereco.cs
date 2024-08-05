@@ -1,4 +1,6 @@
-﻿class Endereco {
+﻿namespace Desafio02.Modelos;
+
+class Endereco {
     public Endereco(string bairro, string rua, string complemento, string estado, string cidade, int numero) {
         Bairro = bairro;
         Rua = rua;
@@ -7,6 +9,8 @@
         Cidade = cidade;
         Numero = numero;
     }
+
+    public Endereco() { }
 
     public string Bairro { get; set; }
     public string Rua { get; set; }
@@ -23,4 +27,5 @@
         Console.WriteLine($"Cidade: {Cidade}");
         Console.WriteLine($"Numero: {Numero}");
     }
+
 }

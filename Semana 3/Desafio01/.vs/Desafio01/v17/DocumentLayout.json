@@ -1,0 +1,71 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Usu\u00E1rio\\Documents\\BEMOL\\bemol\\Semana 3\\Desafio01\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{01F43E33-BB11-4F01-9C9E-0BC32EDD120C}|Desafio01\\Desafio01.csproj|c:\\users\\usu\u00E1rio\\documents\\bemol\\bemol\\semana 3\\desafio01\\desafio01\\modelos\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{01F43E33-BB11-4F01-9C9E-0BC32EDD120C}|Desafio01\\Desafio01.csproj|solutionrelative:desafio01\\modelos\\cliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{01F43E33-BB11-4F01-9C9E-0BC32EDD120C}|Desafio01\\Desafio01.csproj|c:\\users\\usu\u00E1rio\\documents\\bemol\\bemol\\semana 3\\desafio01\\desafio01\\modelos\\endereco.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{01F43E33-BB11-4F01-9C9E-0BC32EDD120C}|Desafio01\\Desafio01.csproj|solutionrelative:desafio01\\modelos\\endereco.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{01F43E33-BB11-4F01-9C9E-0BC32EDD120C}|Desafio01\\Desafio01.csproj|c:\\users\\usu\u00E1rio\\documents\\bemol\\bemol\\semana 3\\desafio01\\desafio01\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{01F43E33-BB11-4F01-9C9E-0BC32EDD120C}|Desafio01\\Desafio01.csproj|solutionrelative:desafio01\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Cliente.cs",
+              "DocumentMoniker": "C:\\Users\\Usu\u00E1rio\\Documents\\BEMOL\\bemol\\Semana 3\\Desafio01\\Desafio01\\Modelos\\Cliente.cs",
+              "RelativeDocumentMoniker": "Desafio01\\Modelos\\Cliente.cs",
+              "ToolTip": "C:\\Users\\Usu\u00E1rio\\Documents\\BEMOL\\bemol\\Semana 3\\Desafio01\\Desafio01\\Modelos\\Cliente.cs",
+              "RelativeToolTip": "Desafio01\\Modelos\\Cliente.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-05T00:45:04.173Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Endereco.cs",
+              "DocumentMoniker": "C:\\Users\\Usu\u00E1rio\\Documents\\BEMOL\\bemol\\Semana 3\\Desafio01\\Desafio01\\Modelos\\Endereco.cs",
+              "RelativeDocumentMoniker": "Desafio01\\Modelos\\Endereco.cs",
+              "ToolTip": "C:\\Users\\Usu\u00E1rio\\Documents\\BEMOL\\bemol\\Semana 3\\Desafio01\\Desafio01\\Modelos\\Endereco.cs",
+              "RelativeToolTip": "Desafio01\\Modelos\\Endereco.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABsAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-05T00:42:41.468Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Usu\u00E1rio\\Documents\\BEMOL\\bemol\\Semana 3\\Desafio01\\Desafio01\\Program.cs",
+              "RelativeDocumentMoniker": "Desafio01\\Program.cs",
+              "ToolTip": "C:\\Users\\Usu\u00E1rio\\Documents\\BEMOL\\bemol\\Semana 3\\Desafio01\\Desafio01\\Program.cs",
+              "RelativeToolTip": "Desafio01\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-05T00:42:20.212Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

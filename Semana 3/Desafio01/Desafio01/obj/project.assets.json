@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Usuário\\Documents\\BEMOL\\bemol\\Semana 2\\Desafio01\\Desafio01\\Desafio01.csproj",
+      "projectUniqueName": "C:\\Users\\Usuário\\Documents\\BEMOL\\bemol\\Semana 3\\Desafio01\\Desafio01\\Desafio01.csproj",
       "projectName": "Desafio01",
-      "projectPath": "C:\\Users\\Usuário\\Documents\\BEMOL\\bemol\\Semana 2\\Desafio01\\Desafio01\\Desafio01.csproj",
+      "projectPath": "C:\\Users\\Usuário\\Documents\\BEMOL\\bemol\\Semana 3\\Desafio01\\Desafio01\\Desafio01.csproj",
       "packagesPath": "C:\\Users\\Usuário\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Usuário\\Documents\\BEMOL\\bemol\\Semana 2\\Desafio01\\Desafio01\\obj\\",
+      "outputPath": "C:\\Users\\Usuário\\Documents\\BEMOL\\bemol\\Semana 3\\Desafio01\\Desafio01\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Usuário\\AppData\\Roaming\\NuGet\\NuGet.Config",
