@@ -1,0 +1,15 @@
+C:\Users\19886\Documents\Bemol\Git\bemol\Semana3-Rennan\Semana3-Rennan\bin\Debug\net8.0\Semana3-Rennan.exe
+C:\Users\19886\Documents\Bemol\Git\bemol\Semana3-Rennan\Semana3-Rennan\bin\Debug\net8.0\Semana3-Rennan.deps.json
+C:\Users\19886\Documents\Bemol\Git\bemol\Semana3-Rennan\Semana3-Rennan\bin\Debug\net8.0\Semana3-Rennan.runtimeconfig.json
+C:\Users\19886\Documents\Bemol\Git\bemol\Semana3-Rennan\Semana3-Rennan\bin\Debug\net8.0\Semana3-Rennan.dll
+C:\Users\19886\Documents\Bemol\Git\bemol\Semana3-Rennan\Semana3-Rennan\bin\Debug\net8.0\Semana3-Rennan.pdb
+C:\Users\19886\Documents\Bemol\Git\bemol\Semana3-Rennan\Semana3-Rennan\obj\Debug\net8.0\Semana3-Rennan.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\19886\Documents\Bemol\Git\bemol\Semana3-Rennan\Semana3-Rennan\obj\Debug\net8.0\Semana3-Rennan.AssemblyInfoInputs.cache
+C:\Users\19886\Documents\Bemol\Git\bemol\Semana3-Rennan\Semana3-Rennan\obj\Debug\net8.0\Semana3-Rennan.AssemblyInfo.cs
+C:\Users\19886\Documents\Bemol\Git\bemol\Semana3-Rennan\Semana3-Rennan\obj\Debug\net8.0\Semana3-Rennan.csproj.CoreCompileInputs.cache
+C:\Users\19886\Documents\Bemol\Git\bemol\Semana3-Rennan\Semana3-Rennan\obj\Debug\net8.0\Semana3-Rennan.sourcelink.json
+C:\Users\19886\Documents\Bemol\Git\bemol\Semana3-Rennan\Semana3-Rennan\obj\Debug\net8.0\Semana3-Rennan.dll
+C:\Users\19886\Documents\Bemol\Git\bemol\Semana3-Rennan\Semana3-Rennan\obj\Debug\net8.0\refint\Semana3-Rennan.dll
+C:\Users\19886\Documents\Bemol\Git\bemol\Semana3-Rennan\Semana3-Rennan\obj\Debug\net8.0\Semana3-Rennan.pdb
+C:\Users\19886\Documents\Bemol\Git\bemol\Semana3-Rennan\Semana3-Rennan\obj\Debug\net8.0\Semana3-Rennan.genruntimeconfig.cache
+C:\Users\19886\Documents\Bemol\Git\bemol\Semana3-Rennan\Semana3-Rennan\obj\Debug\net8.0\ref\Semana3-Rennan.dll
