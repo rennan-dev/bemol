@@ -1,0 +1,277 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebApi</name>
+    </assembly>
+    <members>
+        <member name="M:WebApi.Controller.AdminController.CadastraUsuario(WebApi.Data.Dtos.CreateAdminDto)">
+            <summary>
+            Adiciona um administrador ao banco de dados do WebAPI
+            </summary>
+            <param name="adminDto">Objetos com os campos necessários para a criação de um admin</param>
+            <returns>
+            Task
+            </returns>
+            <response code="200">Caso inserção seja feita com sucesso</response>
+        </member>
+        <member name="M:WebApi.Controller.AdminController.Login(WebApi.Data.Dtos.LoginAdminDto)">
+            <summary>
+            Faz login no sistema como admin
+            </summary>
+            <param name="adminDto">Objetos com os campos necessários para a realização do login</param>
+            <returns>
+            Task
+            </returns>
+            <response code="200">Caso login seja feito com sucesso</response>
+        </member>
+        <member name="M:WebApi.Controller.AdminController.Logout">
+            <summary>
+            Faz login com um administrador no WebAPI
+            </summary>
+            <returns>
+            Task
+            </returns>
+            <response code="200">Caso o admin se deslogue com sucesso</response>
+        </member>
+        <member name="M:WebApi.Controller.AdminController.EmprestarLivro(System.Int32,System.Int32)">
+            <summary>
+            Empresta um livro para um cliente
+            </summary>
+            <param name="clienteId, livroId,livroId">Objetos com os campos necessários para emprestar um livro</param>
+            <returns>
+            Task
+            </returns>
+            <response code="200">Caso tenhha emprestado um livro com sucesso</response>
+        </member>
+        <member name="M:WebApi.Controller.AdminController.DevolverLivro(System.Int32)">
+            <summary>
+            Devolve um livro para WebAPI
+            </summary>
+            <param name="livroId"></param>
+            <returns>
+            Task
+            </returns>
+            <response code="200">Caso a devolução seja feita com sucesso</response>
+        </member>
+        <member name="M:WebApi.Controller.ClienteController.PostCliente(WebApi.Data.Dtos.CreateClienteDto)">
+            <summary>
+            Adiciona um novo cliente ao banco de dados.
+            </summary>
+            <param name="clienteDto">Objeto com os campos necessários para criar um cliente.</param>
+            <returns>Retorna os dados do cliente recém-criado.</returns>
+            <response code="201">Caso o cliente seja criado com sucesso.</response>
+        </member>
+        <member name="M:WebApi.Controller.ClienteController.GetClientePorId(System.Int32)">
+            <summary>
+            Obtém um cliente pelo ID.
+            </summary>
+            <param name="id">ID do cliente.</param>
+            <returns>Dados do cliente correspondente ao ID fornecido.</returns>
+            <response code="200">Se o cliente for encontrado com sucesso.</response>
+            <response code="404">Se o cliente não for encontrado.</response>
+        </member>
+        <member name="M:WebApi.Controller.ClienteController.GetCliente">
+            <summary>
+            Obtém uma lista de todos os clientes.
+            </summary>
+            <returns>Lista de clientes.</returns>
+            <response code="200">Caso a lista seja retornada com sucesso.</response>
+        </member>
+        <member name="M:WebApi.Controller.ClienteController.PutCliente(System.Int32,WebApi.Data.Dtos.UpdateClienteDto)">
+            <summary>
+            Atualiza os dados de um cliente existente.
+            </summary>
+            <param name="id">ID do cliente a ser atualizado.</param>
+            <param name="clienteDto">Dados atualizados do cliente.</param>
+            <returns>Resposta indicando sucesso ou falha.</returns>
+            <response code="204">Se a atualização for feita com sucesso.</response>
+            <response code="400">Se o modelo for inválido.</response>
+            <response code="404">Se o cliente não for encontrado.</response>
+        </member>
+        <member name="M:WebApi.Controller.ClienteController.DeleteCliente(System.Int32)">
+            <summary>
+            Remove um cliente do banco de dados.
+            </summary>
+            <param name="id">ID do cliente a ser removido.</param>
+            <returns>Resposta indicando sucesso ou falha.</returns>
+            <response code="204">Se o cliente for removido com sucesso.</response>
+            <response code="404">Se o cliente não for encontrado.</response>
+        </member>
+        <member name="M:WebApi.Controller.LivroController.PostLivro(WebApi.Data.Dtos.CreateLivroDto)">
+            <summary>
+            Adiciona um novo livro ao banco de dados.
+            </summary>
+            <param name="livroDto">Objeto com os campos necessários para criar um livro.</param>
+            <returns>Retorna os dados do livro recém-criado.</returns>
+            <response code="201">Caso o livro seja criado com sucesso.</response>
+        </member>
+        <member name="M:WebApi.Controller.LivroController.GetLivroPorId(System.Int32)">
+            <summary>
+            Obtém um livro pelo ID.
+            </summary>
+            <param name="id">ID do livro.</param>
+            <returns>Dados do livro correspondente ao ID fornecido.</returns>
+            <response code="200">Se o livro for encontrado com sucesso.</response>
+            <response code="404">Se o livro não for encontrado.</response>
+        </member>
+        <member name="M:WebApi.Controller.LivroController.GetLivro">
+            <summary>
+            Obtém uma lista de todos os livros.
+            </summary>
+            <returns>Lista de livros.</returns>
+            <response code="200">Caso a lista seja retornada com sucesso.</response>
+        </member>
+        <member name="M:WebApi.Controller.LivroController.PutLivro(System.Int32,WebApi.Data.Dtos.UpdateLivroDto)">
+            <summary>
+            Atualiza os dados de um livro existente.
+            </summary>
+            <param name="id">ID do livro a ser atualizado.</param>
+            <param name="livroDto">Dados atualizados do livro.</param>
+            <returns>Resposta indicando sucesso ou falha.</returns>
+            <response code="204">Se a atualização for feita com sucesso.</response>
+            <response code="400">Se o modelo for inválido.</response>
+            <response code="404">Se o livro não for encontrado.</response>
+        </member>
+        <member name="M:WebApi.Controller.LivroController.DeleteLivro(System.Int32)">
+            <summary>
+            Remove um livro do banco de dados.
+            </summary>
+            <param name="id">ID do livro a ser removido.</param>
+            <returns>Resposta indicando sucesso ou falha.</returns>
+            <response code="204">Se o livro for removido com sucesso.</response>
+            <response code="404">Se o livro não for encontrado.</response>
+        </member>
+        <member name="T:WebApi.Migrations.Admin">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApi.Migrations.Admin.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApi.Migrations.Admin.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApi.Migrations.Admin.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:WebApi.Migrations.WebApi">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApi.Migrations.WebApi.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApi.Migrations.WebApi.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApi.Migrations.WebApi.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:WebApi.Migrations.Configuraçãodobanco">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApi.Migrations.Configuraçãodobanco.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApi.Migrations.Configuraçãodobanco.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApi.Migrations.Configuraçãodobanco.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:WebApi.Migrations.Configuraçãodobanco2">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApi.Migrations.Configuraçãodobanco2.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApi.Migrations.Configuraçãodobanco2.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApi.Migrations.Configuraçãodobanco2.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:WebApi.Migrations.Livro">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApi.Migrations.Livro.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApi.Migrations.Livro.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApi.Migrations.Livro.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:WebApi.Migrations.RelaçãoClienteeLivro">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApi.Migrations.RelaçãoClienteeLivro.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApi.Migrations.RelaçãoClienteeLivro.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApi.Migrations.RelaçãoClienteeLivro.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:WebApi.Migrations.RelaçãoClienteeLivro2">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApi.Migrations.RelaçãoClienteeLivro2.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApi.Migrations.RelaçãoClienteeLivro2.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApi.Migrations.RelaçãoClienteeLivro2.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:WebApi.Migrations.RelaçãoClienteeLivro3">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApi.Migrations.RelaçãoClienteeLivro3.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApi.Migrations.RelaçãoClienteeLivro3.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApi.Migrations.RelaçãoClienteeLivro3.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:WebApi.Migrations.AdicionandoRelacionamento">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApi.Migrations.AdicionandoRelacionamento.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApi.Migrations.AdicionandoRelacionamento.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApi.Migrations.AdicionandoRelacionamento.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:WebApi.Migrations.AdicionandoRelacionamentoecorrigindonomenodb">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApi.Migrations.AdicionandoRelacionamentoecorrigindonomenodb.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApi.Migrations.AdicionandoRelacionamentoecorrigindonomenodb.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApi.Migrations.AdicionandoRelacionamentoecorrigindonomenodb.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:WebApi.Migrations.ClienteELivro">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApi.Migrations.ClienteELivro.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApi.Migrations.ClienteELivro.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:WebApi.Migrations.ClienteELivro.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>
