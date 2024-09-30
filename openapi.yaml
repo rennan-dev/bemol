@@ -1,0 +1,223 @@
+openapi: 3.0.1
+info: 
+  title: Comex
+  description: API para consultar produtos, categoria(do produto), clientes e endereço(do cliente) dentro do sistema 
+  version: 1.0.0
+  contact:
+    name: Rennan Dev 7
+    email: rennandev7@gmail.com
+    url: https://github.com/rennan-dev
+  license:
+    name: Licença MIT
+    url: https://www.gnu.org/licenses/gpl-3.0.html  
+externalDocs: 
+  description: Link do projeto
+  url: https://github.com/rennan-dev/bemol
+servers:
+- url: https://localhost:7144
+  description: API de Teste
+paths:
+  /produto:
+    get:
+      summary: Recupera todos os produtos cadastrados
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ReadProdutoDto"
+    post:
+      summary: Adiciona um produto ao comex
+      security: 
+      - auth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+                descricao:
+                  type: string
+                precoUnitario:
+                  type: number
+                  format: double
+                quantidade:
+                  type: number
+                categoriaId:
+                  type: number
+      responses:
+        201:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateProdutoDto"
+        400:
+          description: Produto não cadastrado
+          content:
+            application/json:
+              example: "Bad Request"
+                  
+  /produto/{id}:
+    parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+        required: true
+    get:
+      summary: Recupera um produto específico
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: "#/components/schemas/ReadProdutoDto"
+        404:
+          description: Produto não encontrada
+          content:
+            application/json:
+              example: "Not Found"
+    
+    delete:
+      summary: Apagar uma produto pelo id
+      security: 
+      - auth: []
+      responses: 
+        204:
+          description: Caso a deletação seja feita com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReadProdutoDto"
+        404:
+          description: Retornado quando o produto não é encontrado.
+          content:
+            application/json:
+              example: "Not Found"
+    
+    put:
+      summary: Atualiza um produto do comex
+      security: 
+      - auth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+                descricao:
+                  type: string
+                precoUnitario:
+                  type: number
+                  format: double
+                quantidade:
+                  type: number
+                categoriaId:
+                  type: number
+      responses:
+        201:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpdateProdutoDto"
+        400:
+          description: Produto não atualizado
+          content:
+            application/json:
+              example: "Bad Request"
+        404:
+          description: Produto não encontrada
+          content:
+            application/json:
+              example: "Not Found"
+      
+
+components:
+  schemas:
+    CreateProdutoDto:
+      type: object
+      properties:
+        nome:
+          type: string
+          maxLength: 100
+          description: O nome do produto não pode ultrapassar 100 caracteres.
+        descricao:
+          type: string
+          maxLength: 500
+          description: A descrição do produto não pode ultrapassar 500 caracteres.
+        precoUnitario:
+          type: number
+          format: double
+          description: O preço do produto deve ser maior que zero.
+        quantidade:
+          type: integer
+          minimum: 0
+          description: A quantidade do produto não pode ser menor que zero.
+        categoriaId:
+          type: integer
+          description: O produto precisa de uma categoria.
+    UpdateProdutoDto:
+      type: object
+      properties:
+        nome:
+          type: string
+          maxLength: 100
+          description: O nome do produto não pode ultrapassar 100 caracteres.
+        descricao:
+          type: string
+          maxLength: 500
+          description: A descrição do produto não pode ultrapassar 500 caracteres.
+        precoUnitario:
+          type: number
+          format: double
+          description: O preço do produto deve ser maior que zero.
+        quantidade:
+          type: integer
+          minimum: 0
+          description: A quantidade do produto não pode ser menor que zero.
+        categoriaId:
+          type: integer
+          description: O produto precisa de uma categoria.
+    ReadProdutoDto:
+      type: object
+      properties:
+        id:
+          type: integer
+        nome:
+          type: string
+        descricao:
+          type: string
+        precoUnitario:
+          type: number
+          format: double
+        quantidade:
+          type: integer
+        categoriaId:
+          type: integer
+        readCategoriaDto:  
+          $ref: "#/components/schemas/ReadCategoriaDto"
+          
+    ReadCategoriaDto: 
+      type: object
+      properties:
+        id:
+          type: integer
+        nome:
+          type: string
+  securitySchemes:
+    auth:
+      type: http 
+      scheme: bearer
+      bearerFormat: JWT
