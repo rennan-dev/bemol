@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'Guerreiro.dart';
 import 'Mago.dart';
+import './Feiticos.dart';
 
 void main() {
   List<Guerreiro> guerreiros = [];
@@ -23,16 +24,18 @@ void main() {
       case 1: criar_personagem(guerreiros, magos); break;
         
       case 2: mostrar_personagens(guerreiros, magos); break;
+
+      case 3: adicionar_feitico(magos); break;
         
-      case 3: fazer_feitico(magos); break;
+      case 4: fazer_feitico(magos); break;
         
-      case 4: atacar(guerreiros, magos); break;
+      case 5: atacar(guerreiros, magos); break;
         
-      case 5: print('\nAté a próxima, viajante...\n'); break;
+      case 6: print('\nAté a próxima, viajante...\n'); break;
         
       default: print('Opção inválida. Tente novamente.');
     }
-  }while(opcao != 5);
+  }while(opcao != 6);
 }
 
 int menu_inicial() {
@@ -41,9 +44,10 @@ int menu_inicial() {
   print('\nMenu Inicial');
   print('1 - Criar personagem');
   print('2 - Visualizar personagens');
-  print('3 - Fazer um feitiço com um mago');
-  print('4 - Atacar um personagem');
-  print('5 - Sair da Aplicação');
+  print('3 - Adicionar Feitiço');
+  print('4 - Fazer um feitiço com um mago');
+  print('5 - Atacar um personagem');
+  print('6 - Sair da Aplicação');
   stdout.write('\nResposta: ');
 
   String? input = stdin.readLineSync(); 
@@ -70,8 +74,8 @@ void criar_personagem(List<Guerreiro> guerreiros, List<Mago> magos) {
   print('------------------------------------------------------------------------------------');
 
   String nome = lerEntrada('Digite o nome do personagem: ');
-  if (guerreiros.any((guerreiro) => guerreiro.nome.toLowerCase() == nome.toLowerCase()) || 
-      magos.any((mago) => mago.nome.toLowerCase() == nome.toLowerCase())) {
+  if (guerreiros.any((guerreiro) => guerreiro.getNome.toLowerCase() == nome.toLowerCase()) || 
+      magos.any((mago) => mago.getNome.toLowerCase() == nome.toLowerCase())) {
     print('Nome de personagem já existe. Por favor, escolha um nome diferente.');
     return; 
   }
@@ -114,18 +118,78 @@ void mostrar_personagens(List<Guerreiro> guerreiros, List<Mago> magos) {
   }
 } 
 
+void adicionar_feitico(List<Mago> magos) {
+  limparTela();
+  print('------------------------------------------------------------------------------------');
+  print('\nAdicionar Feitiço\n');
+
+  print('\tMagos: ');
+  magos.forEach((mago) {
+    print('${mago.getNome}');
+  });
+
+  String nome = lerEntrada('\nDigite o nome do personagem: ');
+
+  Mago? mago = magos.firstWhere(
+    (m) => m.getNome.toLowerCase() == nome.toLowerCase(),
+    orElse: () => Mago('', '', 0, 0, 0, 0, false, [])
+  );
+
+  if (mago.getNome.isEmpty) {
+    print('Personagem não existe! Tente com outro');
+  } else {
+    print('\nEscolha o feitiço para adicionar:');
+    print('1 - Fogo');
+    print('2 - Gelo');
+    print('3 - Relâmpago');
+    print('4 - Cura');
+
+    int feiticoSelecionado = int.tryParse(lerEntrada('Digite o número do feitiço: ')) ?? -1;
+
+    Feiticos? feitico;
+    switch (feiticoSelecionado) {
+      case 1:
+        feitico = Feiticos.fogo;
+        break;
+      case 2:
+        feitico = Feiticos.gelo;
+        break;
+      case 3:
+        feitico = Feiticos.relampago;
+        break;
+      case 4:
+        feitico = Feiticos.cura;
+        break;
+      default:
+        print('\nOpção inválida. Tente novamente.');
+        return;
+    }
+
+    int poderFeitico = int.tryParse(lerEntrada('Digite o poder do feitiço: ')) ?? 0;
+    mago.adicionarFeitico(feitico, poderFeitico);
+    print('\nFeitiço ${feitico.name} adicionado com sucesso ao mago ${mago.getNome}!');
+  }
+}
+
+
 void fazer_feitico(List<Mago> magos) {
   limparTela();
   print('------------------------------------------------------------------------------------');
   print('\nFazer magia\n');
-  String nome = lerEntrada('Digite o nome do personagem: ');
+
+  print('\tMagos: ');
+  magos.forEach((mago) {
+    print('${mago.getNome}');
+  });
+
+  String nome = lerEntrada('\nDigite o nome do personagem: ');
 
   Mago? mago = magos.firstWhere(
-    (m) => m.nome.toLowerCase() == nome.toLowerCase(),
+    (m) => m.getNome.toLowerCase() == nome.toLowerCase(),
     orElse: () => Mago('','',0,0,0,0,false,[])
   );
 
-  if (mago.nome.isEmpty) {
+  if (mago.getNome.isEmpty) {
     print('Personagem não existe! Tente com outro');
   } else {
     if (mago.energia >= 10) {
@@ -142,11 +206,11 @@ void atacar(List<Guerreiro> guerreiros, List<Mago> magos) {
   print('Escolha um personagem para atacar:\n');
 
   for (int i = 0; i < guerreiros.length; i++) {
-    print('${i + 1}. ${guerreiros[i].nome} - Vida: ${guerreiros[i].vida} (Guerreiro)');
+    print('${i + 1}. ${guerreiros[i].getNome} - Vida: ${guerreiros[i].vida} (Guerreiro)');
   }
 
   for (int i = 0; i < magos.length; i++) {
-    print('${i + 1 + guerreiros.length}. ${magos[i].nome} - Vida: ${magos[i].vida} (Mago)');
+    print('${i + 1 + guerreiros.length}. ${magos[i].getNome} - Vida: ${magos[i].vida} (Mago)');
   }
 
   int escolhaAtacante = int.parse(lerEntrada('Escolha o número do personagem que atacará: ')) - 1;
@@ -169,13 +233,13 @@ void atacar(List<Guerreiro> guerreiros, List<Mago> magos) {
 
   for (int i = 0; i < guerreiros.length; i++) {
     if (i != escolhaAtacante) {
-      print('${i + 1}. ${guerreiros[i].nome} - Vida: ${guerreiros[i].vida} (Guerreiro)');
+      print('${i + 1}. ${guerreiros[i].getNome} - Vida: ${guerreiros[i].vida} (Guerreiro)');
     }
   }
 
   for (int i = 0; i < magos.length; i++) {
     if (guerreiros.length + i != escolhaAtacante) {
-      print('${i + 1 + guerreiros.length}. ${magos[i].nome} - Vida: ${magos[i].vida} (Mago)');
+      print('${i + 1 + guerreiros.length}. ${magos[i].getNome} - Vida: ${magos[i].vida} (Mago)');
     }
   }
 
