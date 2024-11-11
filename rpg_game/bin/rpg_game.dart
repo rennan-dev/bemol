@@ -2,6 +2,7 @@ import 'dart:io';
 import 'Guerreiro.dart';
 import 'Mago.dart';
 import './Feiticos.dart';
+import './Rpg_Exceptions.dart';
 
 void main() {
   List<Guerreiro> guerreiros = [];
@@ -82,7 +83,8 @@ void criar_personagem(List<Guerreiro> guerreiros, List<Mago> magos) {
 
   String raca = lerEntrada('Digite a raça do personagem: ');
   int idade = int.parse(lerEntrada('Digite a idade do personagem: '));
-  double altura = double.parse(lerEntrada('Digite a altura do personagem: '));
+  stdout.write('Digite a altura do personagem (pode ser nulo): ');
+  double? altura = double.tryParse(stdin.readLineSync() ?? '');
   String classe = lerEntrada('Você quer ser um Guerreiro ou Mago? (digite "guerreiro" ou "mago"): ');
 
   // Verifica a escolha do usuário
@@ -201,74 +203,80 @@ void fazer_feitico(List<Mago> magos) {
 }
 
 void atacar(List<Guerreiro> guerreiros, List<Mago> magos) {
-  limparTela();
-  print('------------------------------------------------------------------------------------');
-  print('Escolha um personagem para atacar:\n');
+  try {
+    limparTela();
+    print('------------------------------------------------------------------------------------');
+    print('Escolha um personagem para atacar:\n');
 
-  for (int i = 0; i < guerreiros.length; i++) {
-    print('${i + 1}. ${guerreiros[i].getNome} - Vida: ${guerreiros[i].vida} (Guerreiro)');
-  }
-
-  for (int i = 0; i < magos.length; i++) {
-    print('${i + 1 + guerreiros.length}. ${magos[i].getNome} - Vida: ${magos[i].vida} (Mago)');
-  }
-
-  int escolhaAtacante = int.parse(lerEntrada('Escolha o número do personagem que atacará: ')) - 1;
-
-  if (escolhaAtacante < 0 || escolhaAtacante >= (guerreiros.length + magos.length)) {
-    print('Escolha inválida.');
-    return;
-  }
-
-  // Determina o atacante
-  dynamic atacanteEscolhido;
-  if (escolhaAtacante < guerreiros.length) {
-    atacanteEscolhido = guerreiros[escolhaAtacante];
-  } else {
-    atacanteEscolhido = magos[escolhaAtacante - guerreiros.length];
-  }
-
-  print('------------------------------------------------------------------------------------');
-  print('Escolha um personagem para ser atacado:\n');
-
-  for (int i = 0; i < guerreiros.length; i++) {
-    if (i != escolhaAtacante) {
-      print('${i + 1}. ${guerreiros[i].getNome} - Vida: ${guerreiros[i].vida} (Guerreiro)');
+    for (int i = 0; i < guerreiros.length; i++) {
+      print('${i + 1}. ${guerreiros[i].getNome} - Vida: ${guerreiros[i].getPontosVida} (Guerreiro)');
     }
-  }
 
-  for (int i = 0; i < magos.length; i++) {
-    if (guerreiros.length + i != escolhaAtacante) {
-      print('${i + 1 + guerreiros.length}. ${magos[i].getNome} - Vida: ${magos[i].vida} (Mago)');
+    for (int i = 0; i < magos.length; i++) {
+      print('${i + 1 + guerreiros.length}. ${magos[i].getNome} - Vida: ${magos[i].getPontosVida} (Mago)');
     }
-  }
 
-  int escolhaDefensor = int.parse(lerEntrada('Escolha o número do personagem a ser atacado: ')) - 1;
+    int escolhaAtacante = int.parse(lerEntrada('Escolha o número do personagem que atacará: ')) - 1;
 
-  if (escolhaDefensor < 0 || escolhaDefensor >= (guerreiros.length + magos.length) || escolhaDefensor == escolhaAtacante) {
-    print('Escolha inválida.');
-    return;
-  }
-
-  dynamic defensorEscolhido;
-  if (escolhaDefensor < guerreiros.length) {
-    defensorEscolhido = guerreiros[escolhaDefensor];
-  } else {
-    defensorEscolhido = magos[escolhaDefensor - guerreiros.length];
-  }
-
-  if (atacanteEscolhido.vida <= 0) {
-    print('${atacanteEscolhido.nome} não pode atacar porque está sem vida.');
-  } else if (defensorEscolhido.vida <= 0) {
-    print('${defensorEscolhido.nome} não pode ser atacado porque está sem vida.');
-  } else {
-    if (atacanteEscolhido is Guerreiro) {
-      atacanteEscolhido.atacar(defensorEscolhido);
-    } else if (atacanteEscolhido is Mago) {
-      atacanteEscolhido.atacar(defensorEscolhido);
+    if (escolhaAtacante < 0 || escolhaAtacante >= (guerreiros.length + magos.length)) {
+      print('Escolha inválida.');
+      return;
     }
+
+    // Determina o atacante
+    dynamic atacanteEscolhido;
+    if (escolhaAtacante < guerreiros.length) {
+      atacanteEscolhido = guerreiros[escolhaAtacante];
+    } else {
+      atacanteEscolhido = magos[escolhaAtacante - guerreiros.length];
+    }
+
+    print('------------------------------------------------------------------------------------');
+    print('Escolha um personagem para ser atacado:\n');
+
+    for (int i = 0; i < guerreiros.length; i++) {
+      if (i != escolhaAtacante) {
+        print('${i + 1}. ${guerreiros[i].getNome} - Vida: ${guerreiros[i].getPontosVida} (Guerreiro)');
+      }
+    }
+
+    for (int i = 0; i < magos.length; i++) {
+      if ((i + guerreiros.length) != escolhaAtacante) {
+        print('${i + 1 + guerreiros.length}. ${magos[i].getNome} - Vida: ${magos[i].getPontosVida} (Mago)');
+      }
+    }
+
+    int escolhaAtacado = int.parse(lerEntrada('Escolha o número do personagem a ser atacado: ')) - 1;
+
+    if (escolhaAtacado < 0 || escolhaAtacado >= (guerreiros.length + magos.length)) {
+      print('Escolha inválida.');
+      return;
+    }
+
+    // Determina o atacado
+    dynamic atacadoEscolhido;
+    if (escolhaAtacado < guerreiros.length) {
+      atacadoEscolhido = guerreiros[escolhaAtacado];
+    } else {
+      atacadoEscolhido = magos[escolhaAtacado - guerreiros.length];
+    }
+
+    // Verifica se o personagem atacado está sem vida
+    if (atacadoEscolhido.getPontosVida <= 0) {
+      throw PersonagemDerrotadoException(personagem: atacadoEscolhido);
+    }
+
+    // Simula a lógica do ataque
+    atacanteEscolhido.atacar(atacadoEscolhido);
+
+  } on PersonagemDerrotadoException catch (e) {
+    print(e.toString()); // Mostra a mensagem da exceção
+    print('Voltando ao menu principal...');
+  } catch (e) {
+    print('Erro inesperado: $e');
   }
 }
+
 
 void limparTela() {
   print("\x1B[2J\x1B[0;0H");

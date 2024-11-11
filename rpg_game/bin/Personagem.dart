@@ -2,13 +2,13 @@ import 'StatusDeVida.dart';
 
 class Personagem {
   String _nome, _raca, _classe;
-  int idade, vida, energia;
-  double altura;
+  int idade, _pontosVida, energia;
+  double? altura;
   bool isMagico;
   List<String> habilidades;
   StatusDeVida statusDeVida;
 
-  Personagem(this._nome, this._raca, this._classe, this.idade, this.vida, this.energia, this.altura, this.isMagico, this.habilidades) : statusDeVida = StatusDeVida.vivo;
+  Personagem(this._nome, this._raca, this._classe, this.idade, this._pontosVida, this.energia, this.altura, this.isMagico, this.habilidades) : statusDeVida = StatusDeVida.vivo;
 
   //getters - started
   String get getNome {
@@ -19,6 +19,9 @@ class Personagem {
   }
   String get getClasse {
     return _classe;
+  }
+  int get getPontosVida {
+    return _pontosVida;
   }
   //getters - ended
 
@@ -32,22 +35,31 @@ class Personagem {
   void set setClasse(String novaClasse) {
     _classe = novaClasse;
   }
+  void set setPontosVida(int pontosVida) {
+    try {
+      if(pontosVida < 0) {
+        throw ArgumentError('Os pontos de vida não podem ser negativos');
+      }
+      _pontosVida = pontosVida;
+    }catch(e) {
+      print('Erro: $e');
+    }
+  }
   //setters - ended
 
   String exibirFicha() {
-    String statusDeVidaStr = statusDeVida.toString().split('.').last;
-
-    return '\n'
-           'Nome: $_nome\nRaça: $_raca\nClasse: $_classe\n'
-           'Idade: $idade\nVida: $vida\nStatus de Vida: $statusDeVidaStr\nEnergia: $energia\n'
-           'Altura: $altura\nPossui Magia? $isMagico\n'
-           'Conjunto de Habilidades:\n\t${habilidades.join('\n\t')}\n';
+  
+  return '\n'
+         'Nome: $_nome\nRaça: $_raca\nClasse: $_classe\n'
+         'Idade: $idade\nVida: $_pontosVida\nStatus de Vida: ${statusDeVida.name}\nEnergia: $energia\n'
+         'Altura: ${altura != null ? altura?.toStringAsFixed(2) : "Altura não especificada"}\nPossui Magia? $isMagico\n'
+         'Conjunto de Habilidades:\n\t${habilidades.join('\n\t')}\n';
   }
 
   void atualizarStatus(Personagem personagem) {
-    if(personagem.vida>50) {
+    if(personagem._pontosVida>50) {
       personagem.statusDeVida = StatusDeVida.vivo;
-    }else if(personagem.vida>0 && personagem.vida<=50) {
+    }else if(personagem._pontosVida>0 && personagem._pontosVida<=50) {
       personagem.statusDeVida = StatusDeVida.ferido;
     }else {
       personagem.statusDeVida = StatusDeVida.derrotado;
