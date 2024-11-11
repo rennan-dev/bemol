@@ -6,7 +6,7 @@ class Mago extends Personagem  implements Combate {
   String _arma = 'Cajado Mágico';
   Map<Feiticos, int> _feiticos = {};
 
-  Mago(String nome, String raca, int idade, int vida, int energia, double altura, bool isMagico, List<String> habilidades): super(nome, raca, 'Mago', idade, vida, energia, altura, isMagico, habilidades);
+  Mago(String nome, String raca, int idade, int vida, int energia, double? altura, bool isMagico, List<String> habilidades): super(nome, raca, 'Mago', idade, vida, energia, altura, isMagico, habilidades);
 
   @override
   String exibirFicha() {
@@ -65,14 +65,15 @@ class Mago extends Personagem  implements Combate {
   void atacar(Personagem personagem) {
     print('------------------------------------------------------------------------------------');
     if(personagem.getNome != getNome) {
-      if(personagem.vida>0) {
+      if(personagem.getPontosVida>0) {
       print('\nCombate acontecendo');
       print('$getNome atacando ${personagem.getNome}');
-      personagem.vida -= 10;
-      if(personagem.vida<0) { 
-        personagem.vida = 0; 
+      if(personagem.getPontosVida-10 < 0) { 
+        personagem.setPontosVida = 0;
+      }else {
+        personagem.setPontosVida = personagem.getPontosVida - 10;
       }
-      print('Dano de ataque: 10\nVida atual de ${personagem.getNome}: ${personagem.vida}');
+      print('Dano de ataque: 10\nVida atual de ${personagem.getNome}: ${personagem.getPontosVida}');
       print("                             /\\");
       print("                            /  \\");
       print("                           |    |");
