@@ -9,14 +9,22 @@ class PersonagemCard extends StatefulWidget {
   final String raca;
   final String image;
 
-  const PersonagemCard(this.nome, this.forca, this.raca, this.image, {super.key});
+  PersonagemCard(this.nome, this.forca, this.raca, this.image, {super.key});
+
+  int life = 10;
 
   @override
   State<PersonagemCard> createState() => _PersonagemCardState();
 }
 
 class _PersonagemCardState extends State<PersonagemCard> {
-  int life = 10;
+
+  bool assetOrNetwork() {
+    if(widget.image.contains('http')) {
+      return false;
+    }
+    return true;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +45,8 @@ class _PersonagemCardState extends State<PersonagemCard> {
                     decoration: BoxDecoration(color: Colors.black26, borderRadius: BorderRadius.circular(4)), width: 72, height: 100,
                     child: ClipRRect(
                         borderRadius: BorderRadius.circular(4),
-                        child: Image.asset(widget.image, fit: BoxFit.cover,
-                        )),
+                        child: assetOrNetwork() ? Image.asset(widget.image, fit: BoxFit.cover) : Image.network(widget.image, fit: BoxFit.cover),
+                        ),
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -58,7 +66,7 @@ class _PersonagemCardState extends State<PersonagemCard> {
                       children: [
                         ElevatedButton(onPressed: (){
                           setState(() {
-                            life<10?life++:life;
+                            widget.life<10?widget.life++:widget.life;
                           });
                         }, style: ElevatedButton.styleFrom(
                           minimumSize: const Size(40, 40),
@@ -69,7 +77,7 @@ class _PersonagemCardState extends State<PersonagemCard> {
                         ),
                         ElevatedButton(onPressed: (){
                           setState(() {
-                            life>0?life--:life;
+                            widget.life>0?widget.life--:widget.life;
                           });
                         }, style: ElevatedButton.styleFrom(
                           minimumSize: const Size(40, 40),
@@ -89,12 +97,12 @@ class _PersonagemCardState extends State<PersonagemCard> {
                     padding: const EdgeInsets.all(8),
                     child: SizedBox(width: 200, child: LinearProgressIndicator(
                       color: Colors.green,
-                      value: life/10,
+                      value: widget.life/10,
                     )),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8),
-                    child: Text('Vida ${life*10}', style: const TextStyle(color: Colors.white, fontSize: 16),),
+                    child: Text('Vida ${widget.life*10}', style: const TextStyle(color: Colors.white, fontSize: 16),),
                   ),
                 ],
               ),
