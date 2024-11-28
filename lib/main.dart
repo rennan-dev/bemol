@@ -1,3 +1,4 @@
+import 'package:entregar/data/personagem_provider.dart';
 import 'package:entregar/screens/initial_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const InitialScreen(),
+      home: PersonagemProvider(child: const InitialScreen(),),
     );
   }
 }
