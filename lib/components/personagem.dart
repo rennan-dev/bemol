@@ -1,23 +1,22 @@
-
-
 import 'package:entregar/components/forca_personagem.dart';
+import 'package:entregar/data/personagem_dao.dart';
 import 'package:flutter/material.dart';
 
-class PersonagemCard extends StatefulWidget {
+class Personagem extends StatefulWidget {
   final String nome;
   final int forca;
   final String raca;
   final String image;
 
-  PersonagemCard(this.nome, this.forca, this.raca, this.image, {super.key});
+  Personagem(this.nome, this.forca, this.raca, this.image, {super.key});
 
   int life = 10;
 
   @override
-  State<PersonagemCard> createState() => _PersonagemCardState();
+  State<Personagem> createState() => _PersonagemState();
 }
 
-class _PersonagemCardState extends State<PersonagemCard> {
+class _PersonagemState extends State<Personagem> {
 
   bool assetOrNetwork() {
     if(widget.image.contains('http')) {
@@ -79,7 +78,14 @@ class _PersonagemCardState extends State<PersonagemCard> {
                           setState(() {
                             widget.life>0?widget.life--:widget.life;
                           });
-                        }, style: ElevatedButton.styleFrom(
+                        },
+                        onLongPress: () {
+                         setState(() {
+                            if(widget.life==0) {
+                              PersonagemDao().delete(widget.nome);
+                            }
+                         });
+                        },style: ElevatedButton.styleFrom(
                           minimumSize: const Size(40, 40),
                           backgroundColor: Colors.green,
                           shape: const CircleBorder(),
