@@ -1,4 +1,5 @@
-import 'package:entregar/data/personagem_provider.dart';
+import 'package:entregar/components/personagem.dart';
+import 'package:entregar/data/personagem_dao.dart';
 import 'package:flutter/material.dart';
 
 class FormScreen extends StatefulWidget {
@@ -164,13 +165,9 @@ class _FormScreenState extends State<FormScreen> {
                   ),
                   ElevatedButton(onPressed: () {
                     if(_formKey.currentState!.validate()) {
-                      // print(nomeController.text);
-                      // print(racaController.text);
-                      // print(int.parse(forcaController.text));
-                      // print(imagemController.text);
-                      PersonagemProvider.of(widget.formContext).newPersonagem(nomeController.text, racaController.text, int.parse(forcaController.text), imagemController.text);
+                      PersonagemDao().save(Personagem(nomeController.text, int.parse(forcaController.text), racaController.text, imagemController.text));
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Personagem criado com sucesso!')));
-                      Navigator.pop(context);
+                      Navigator.pop(context, true);
                     }
                   },
                   child: const Text('Adicionar'),
