@@ -1,6 +1,6 @@
 # entregar
 
-Projeto desenvolvido para a semana 19 e 20 da Alura
+Projeto desenvolvido para a semana 23 da Alura
 
 ## Getting Started
 
