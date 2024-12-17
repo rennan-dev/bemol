@@ -1,0 +1,32 @@
+{
+  "users": [
+    {
+      "email": "rennan@gmail.com",
+      "password": "123123",
+      "id": 1
+    }
+  ],
+  "characters": [
+    {
+      "nome": "Escanor",
+      "forca": 5,
+      "raca": "Humano",
+      "image": "https://th.bing.com/th/id/R.37192c572ae3a12ee077e33c11e2faf7?rik=lDKprxVZp6UfgA&pid=ImgRaw&r=0",
+      "id": 2
+    },
+    {
+      "nome": "Meliodas",
+      "forca": 5,
+      "raca": "Demonio",
+      "image": "https://zonacritica.com.br/wp-content/uploads/2022/06/Meliodas.jpg",
+      "id": 3
+    },
+    {
+      "nome": "King",
+      "forca": 4,
+      "raca": "Fada",
+      "image": "https://th.bing.com/th/id/OIP.hCTQoQtjac63z0Qb6V-zmgHaHa?rs=1&pid=ImgDetMain",
+      "id": 4
+    }
+  ]
+}

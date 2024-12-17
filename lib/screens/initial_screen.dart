@@ -1,9 +1,8 @@
-
-
 import 'package:entregar/components/personagem.dart';
-import 'package:entregar/data/personagem_dao.dart';
-import 'package:entregar/screens/form_screen.dart';
+import 'package:entregar/services/character_service.dart';
 import 'package:flutter/material.dart';
+
+import 'form_screen.dart';
 
 class InitialScreen extends StatefulWidget {
   const InitialScreen({super.key});
@@ -13,6 +12,11 @@ class InitialScreen extends StatefulWidget {
 }
 
 class _InitialScreenState extends State<InitialScreen> {
+  final CharacterService characterService = CharacterService();
+
+  Future<List<Personagem>> _getAllCharacters() async {
+    return await characterService.getAllCharacters();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,72 +24,101 @@ class _InitialScreenState extends State<InitialScreen> {
       appBar: AppBar(
         title: const Text('Lista de Personagens'),
         actions: [
-          IconButton(onPressed: (){setState(() {
-
-          });}, icon: const Icon(Icons.refresh)),
+          IconButton(
+            onPressed: () => setState(() {}),
+            icon: const Icon(Icons.refresh),
+          ),
         ],
         backgroundColor: Colors.lightGreen,
       ),
-      body: Padding(padding: const EdgeInsets.only(top: 8, bottom: 70),
-        child: FutureBuilder<List<Personagem>>
-          (future: PersonagemDao().findAll(), builder: (context, snapshot){
-            List<Personagem>? personagens = snapshot.data;
-            switch(snapshot.connectionState) {
-
+      body: Padding(
+        padding: const EdgeInsets.only(top: 8, bottom: 70),
+        child: FutureBuilder<List<Personagem>>(
+          future: _getAllCharacters(), // Carregar personagens do banco
+          builder: (context, snapshot) {
+            switch (snapshot.connectionState) {
               case ConnectionState.none:
-                return const Center(child: Column(
-                  children: [
-                    CircularProgressIndicator(),
-                    Text('Carregando'),
-                  ],
-                ),);
               case ConnectionState.waiting:
-                return const Center(child: Column(
-                  children: [
-                    CircularProgressIndicator(),
-                    Text('Carregando'),
-                  ],
-                ),);
               case ConnectionState.active:
-                return const Center(child: Column(
-                  children: [
-                    CircularProgressIndicator(),
-                    Text('Carregando'),
-                  ],
-                ),);
-              case ConnectionState.done:
-                if(snapshot.hasData && personagens!=null) {
-                  if(personagens.isNotEmpty) {
-                    return ListView.builder(itemCount: personagens.length, itemBuilder: (BuildContext context, int index){
-                      final Personagem personagemCard = personagens[index];
-                      return personagemCard;
-                    });
-                  }
-                  return const Center(child: Column(
+                return const Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.error_outline, size: 128,),
-                      Text('Não há nenhum personagem.',
-                      style: TextStyle(fontSize: 24),),
+                      CircularProgressIndicator(),
+                      Text('Carregando...'),
                     ],
-                  ),);
+                  ),
+                );
+              case ConnectionState.done:
+                if (snapshot.hasError) {
+                  return Center(
+                    child: Text('Erro ao carregar personagens: ${snapshot.error}'),
+                  );
                 }
-                return const Text('Erro ao carregar personagens.');
+
+                if (snapshot.hasData && snapshot.data != null) {
+                  final personagens = snapshot.data!;
+                  if (personagens.isNotEmpty) {
+                    return ListView.builder(
+                      itemCount: personagens.length,
+                      itemBuilder: (context, index) {
+                        final personagem = personagens[index];
+                        return Personagem(
+                          personagem.nome,
+                          personagem.forca,
+                          personagem.raca,
+                          personagem.image,
+                          id: personagem.id,
+                        );
+                      },
+                    );
+                  } else {
+                    return const Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.error_outline, size: 128),
+                          Text(
+                            'Não há nenhum personagem.',
+                            style: TextStyle(fontSize: 24),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+                } else {
+                  return const Center(
+                    child: Text('Erro ao carregar personagens.'),
+                  );
+                }
+
             }
-        },),
+          },
+        ),
       ),
-      floatingActionButton: FloatingActionButton(onPressed: (){
-        Navigator.push(
-            context, MaterialPageRoute(
-            builder: (contextNew) => FormScreen(formContext: context,),),
-        ).then((value) {
-          if (value == true) {
-            setState(() {
-            });
-          }
-        });
-      },
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (contextNew) => FormScreen(formContext: context),
+            ),
+          ).then((value) {
+            if (value != null && value is String && value.isNotEmpty) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(value),
+                  backgroundColor: value.contains('sucesso')
+                      ? Colors.green
+                      : Colors.red,
+                ),
+              );
+            }
+            setState(() {}); // Atualiza a lista de personagens
+          });
+        },
         backgroundColor: const Color(0xFF05A52F),
-        child: const Icon(Icons.add, color: Colors.white,),
+        child: const Icon(Icons.add, color: Colors.white),
       ),
     );
   }

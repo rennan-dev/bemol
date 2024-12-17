@@ -16,10 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: PersonagemProvider(child: const InitialScreen(),),
+      home: PersonagemProvider(child: const InitialScreen()),
     );
   }
 }
-
-
-
