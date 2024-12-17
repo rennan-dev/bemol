@@ -1,5 +1,5 @@
 import 'package:entregar/components/personagem.dart';
-import 'package:entregar/data/personagem_dao.dart';
+import 'package:entregar/services/character_service.dart';
 import 'package:flutter/material.dart';
 
 class FormScreen extends StatefulWidget {
@@ -165,9 +165,11 @@ class _FormScreenState extends State<FormScreen> {
                   ),
                   ElevatedButton(onPressed: () {
                     if(_formKey.currentState!.validate()) {
-                      PersonagemDao().save(Personagem(nomeController.text, int.parse(forcaController.text), racaController.text, imagemController.text));
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Personagem criado com sucesso!')));
-                      Navigator.pop(context, true);
+                      // PersonagemDao().save(Personagem(nomeController.text, int.parse(forcaController.text), racaController.text, imagemController.text));
+                      // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Personagem criado com sucesso!')));
+                      // Navigator.pop(context, true);
+
+                      registerCharacter(context);
                     }
                   },
                   child: const Text('Adicionar'),
@@ -180,4 +182,26 @@ class _FormScreenState extends State<FormScreen> {
       ),
     );
   }
+  void registerCharacter(BuildContext context) {
+    CharacterService service = CharacterService();
+
+    service.register(
+      Personagem(
+        nomeController.text,
+        int.parse(forcaController.text),
+        racaController.text,
+        imagemController.text,
+      ),
+    ).then((result) {
+      String message = result
+          ? 'Personagem adicionado com sucesso!'
+          : 'Houve um erro ao adicionar um personagem!';
+
+      Navigator.pop(context, message);
+    }).catchError((error) {
+      Navigator.pop(context, 'Houve um erro inesperado.');
+    });
+  }
+
+
 }

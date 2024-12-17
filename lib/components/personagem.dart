@@ -1,16 +1,47 @@
+import 'dart:io';
+
 import 'package:entregar/components/forca_personagem.dart';
-import 'package:entregar/data/personagem_dao.dart';
+import 'package:entregar/services/character_service.dart';
 import 'package:flutter/material.dart';
 
+import '../screens/commom/confirmation_dialog.dart';
+import '../screens/commom/exception_dialog.dart';
+
 class Personagem extends StatefulWidget {
+  final String? id; // id agora pode ser nulo
   final String nome;
   final int forca;
   final String raca;
   final String image;
 
-  Personagem(this.nome, this.forca, this.raca, this.image, {super.key});
+  Personagem(this.nome, this.forca, this.raca, this.image, {this.id, super.key});
+
 
   int life = 10;
+
+  Personagem.fromMap(Map<String, dynamic> map)
+      : id = map["id"] != null ? map["id"].toString() : null,
+        nome = map["nome"],
+        forca = map["forca"],
+        raca = map["raca"],
+        image = map["image"];
+
+
+
+  Map<String, dynamic> toMap() {
+    final map = {
+      "nome": nome,
+      "forca": forca,
+      "raca": raca,
+      "image": image
+    };
+
+    if (id != null) {
+      map["id"] = id.toString();
+    }
+    return map;
+  }
+
 
   @override
   State<Personagem> createState() => _PersonagemState();
@@ -82,7 +113,10 @@ class _PersonagemState extends State<Personagem> {
                         onLongPress: () {
                          setState(() {
                             if(widget.life==0) {
-                              PersonagemDao().delete(widget.nome);
+                              //PersonagemDao().delete(widget.nome);
+                              print('Personagem ${widget.nome} sem vida.');
+                              removePersonagem(context, widget.id);
+
                             }
                          });
                         },style: ElevatedButton.styleFrom(
@@ -118,4 +152,43 @@ class _PersonagemState extends State<Personagem> {
       ),
     );
   }
+
+  void removePersonagem(BuildContext context, String? personagemId) {
+    if (personagemId == null || personagemId.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("ID do personagem inválido")),
+      );
+      return;
+    }
+
+    CharacterService personagemService = CharacterService();
+    showConfirmationDialog(
+      context,
+      content: "Deseja excluir personagem?",
+      affirmativeOption: "Excluir",
+    ).then((confirmar) {
+      if (confirmar != null && confirmar) {
+        personagemService.delete(personagemId).then((success) {
+          if (success) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text("Personagem removido com sucesso, atualize a tela.")),
+            );
+          }
+        }).catchError((error) {
+          var innerError = error is HttpException ? error : null;
+          if (innerError != null) {
+            showExceptionDialog(context, content: innerError.message);
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text("Erro ao tentar remover personagem")),
+            );
+          }
+        });
+      }
+    });
+  }
+
+
+
+
 }
