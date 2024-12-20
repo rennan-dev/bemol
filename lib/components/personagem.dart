@@ -8,7 +8,7 @@ import '../screens/commom/confirmation_dialog.dart';
 import '../screens/commom/exception_dialog.dart';
 
 class Personagem extends StatefulWidget {
-  final String? id; // id agora pode ser nulo
+  final String? id; 
   final String nome;
   final int forca;
   final String raca;
