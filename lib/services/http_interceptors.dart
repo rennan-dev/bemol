@@ -23,6 +23,7 @@ class LoggerInterceptor extends InterceptorContract {
   Future<BaseResponse> interceptResponse({
     required BaseResponse response,
   }) async {
+    log("interceptResponse chamado");
     log('----- Response -----');
     logger.i(
       "Resposta para: ${response.request?.url}\n"

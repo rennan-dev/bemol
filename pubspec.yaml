@@ -36,6 +36,7 @@ dependencies:
   http_interceptor: ^2.0.0
   logger: ^2.5.0
   path: ^1.8.0
+  shared_preferences: ^2.0.15
 
 
   # The following adds the Cupertino Icons font to your application.
