@@ -1,11 +1,20 @@
-import 'package:entregar/components/personagem.dart';
+import 'dart:io';
+
 import 'package:entregar/services/character_service.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../helpers/logout.dart';
+import '../commom/exception_dialog.dart';
+import '../initial_screen/widgets/personagem.dart';
 
 class FormScreen extends StatefulWidget {
-  const FormScreen({super.key, required this.formContext});
+  const FormScreen({super.key, required this.formContext, this.personagem, required this.isEditing, required this.userId});
 
   final BuildContext formContext;
+  final Personagem? personagem;
+  final bool isEditing;
+  final int userId;
 
   @override
   State<FormScreen> createState() => _FormScreenState();
@@ -13,12 +22,38 @@ class FormScreen extends StatefulWidget {
 
 class _FormScreenState extends State<FormScreen> {
 
-  TextEditingController nomeController = TextEditingController();
-  TextEditingController racaController = TextEditingController();
-  TextEditingController forcaController = TextEditingController();
-  TextEditingController imagemController = TextEditingController();
+  late TextEditingController nomeController;
+  late TextEditingController racaController;
+  late TextEditingController forcaController;
+  late TextEditingController imagemController;
 
   final _formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+    nomeController = TextEditingController(
+      text: widget.personagem?.nome ?? '',
+    );
+    racaController = TextEditingController(
+      text: widget.personagem?.raca ?? '',
+    );
+    forcaController = TextEditingController(
+      text: widget.personagem?.forca.toString() ?? '',
+    );
+    imagemController = TextEditingController(
+      text: widget.personagem?.image ?? '',
+    );
+  }
+
+  @override
+  void dispose() {
+    nomeController.dispose();
+    racaController.dispose();
+    forcaController.dispose();
+    imagemController.dispose();
+    super.dispose();
+  }
 
   bool valueValidate(String? value) {
     if(value!=null && value.isEmpty) {
@@ -42,8 +77,24 @@ class _FormScreenState extends State<FormScreen> {
       key: _formKey,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Adicionar Personagem'),
-          backgroundColor: Colors.lightGreen,
+          iconTheme: const IconThemeData(
+            color: Colors.white,
+          ),
+          title: Text(
+            style: const TextStyle(color: Colors.white),
+            widget.personagem == null
+                ? 'Adicionar Personagem'
+                : 'Editar Personagem',
+          ),
+          flexibleSpace: Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Color(0xFF8E2DE2), Color(0xFF4A00E0)],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
+            ),
+          ),
         ),
         body: Center(
           child: SingleChildScrollView(
@@ -51,7 +102,11 @@ class _FormScreenState extends State<FormScreen> {
               height: 650,
               width: 375,
               decoration: BoxDecoration(
-                color: Colors.lightGreen,
+                gradient: const LinearGradient(
+                  colors: [Color(0xFF8E2DE2), Color(0xFF4A00E0)],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(width: 4),
               ),
@@ -168,8 +223,11 @@ class _FormScreenState extends State<FormScreen> {
                       // PersonagemDao().save(Personagem(nomeController.text, int.parse(forcaController.text), racaController.text, imagemController.text));
                       // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Personagem criado com sucesso!')));
                       // Navigator.pop(context, true);
-
-                      registerCharacter(context);
+                      if(widget.isEditing) {
+                        editChatacter(context);
+                      }else {
+                        registerCharacter(context);
+                      }
                     }
                   },
                   child: const Text('Adicionar'),
@@ -185,23 +243,67 @@ class _FormScreenState extends State<FormScreen> {
   void registerCharacter(BuildContext context) {
     CharacterService service = CharacterService();
 
-    service.register(
-      Personagem(
-        nomeController.text,
-        int.parse(forcaController.text),
-        racaController.text,
-        imagemController.text,
-      ),
-    ).then((result) {
-      String message = result
-          ? 'Personagem adicionado com sucesso!'
-          : 'Houve um erro ao adicionar um personagem!';
+    SharedPreferences.getInstance().then((prefs) {
+      String? token = prefs.getString("accessToken");
+      if(token!=null) {
+        service.register(
+          Personagem(
+              nomeController.text,
+              int.parse(forcaController.text),
+              racaController.text,
+              imagemController.text,
+              widget.userId
+          ), token,
+        ).then((result) {
+          String message = result
+              ? 'Personagem adicionado com sucesso!'
+              : 'Houve um erro ao adicionar um personagem!';
 
-      Navigator.pop(context, message);
-    }).catchError((error) {
-      Navigator.pop(context, 'Houve um erro inesperado.');
+          Navigator.pop(context, message);
+        }).catchError(
+              (error) {
+            logout(context);
+          },
+          test: (error) => error is TokenNotValidException,
+        ).catchError(
+                (error) {
+              var innerError = error as HttpException;
+              showExceptionDialog(context, content: innerError.message);
+            },
+            test: (error) => error is HttpException
+        );
+      }
     });
   }
 
+  void editChatacter(BuildContext context) {
+    CharacterService service = CharacterService();
 
+    SharedPreferences.getInstance().then((prefs) {
+      String? token = prefs.getString("accessToken");
+      if(token!=null) {
+        service.edit(
+          (widget.personagem?.id).toString(),
+          Personagem(nomeController.text, int.parse(forcaController.text), racaController.text, imagemController.text, widget.userId), token,
+        ).then((result) {
+          String message = result
+              ? 'Personagem editado com sucesso!'
+              : 'Houve um erro ao editar o personagem!';
+
+          Navigator.pop(context, message);
+        }).catchError(
+              (error) {
+            logout(context);
+          },
+          test: (error) => error is TokenNotValidException,
+        ).catchError(
+                (error) {
+              var innerError = error as HttpException;
+              showExceptionDialog(context, content: innerError.message);
+            },
+            test: (error) => error is HttpException
+        );
+      }
+    });
+  }
 }
