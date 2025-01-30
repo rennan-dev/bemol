@@ -1,0 +1,52 @@
+version: "3.9"
+services:
+  mysql: 
+    image: mysql:5.6
+    container_name: mysql
+    networks:
+      - microsservice-bridge
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      retries: 5
+      timeout: 5s
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq-service
+    networks:
+      - microsservice-bridge
+    ports:
+      - 5672:5672
+
+  estoque-service:
+    image: estoqueservice:1.1
+    container_name: estoque
+    networks:
+      - microsservice-bridge
+    ports:
+      - 5222:8080
+    depends_on:
+      mysql:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_started
+
+  pedido-service:
+    image: pedidoservice:1.1
+    container_name: pedido
+    networks:
+      - microsservice-bridge
+    ports:
+      - 5047:8080
+    depends_on:
+      mysql:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_started
+
+networks:
+  microsservice-bridge:
+    driver: bridge

@@ -1,0 +1,30 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Estoque", "Estoque\Estoque.csproj", "{F3D59A75-4991-E933-B7C4-89C4A7B64AB1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pedido", "Pedido\Pedido.csproj", "{49544C58-8DEE-8861-FF92-12850BB4F88B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F3D59A75-4991-E933-B7C4-89C4A7B64AB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3D59A75-4991-E933-B7C4-89C4A7B64AB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3D59A75-4991-E933-B7C4-89C4A7B64AB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3D59A75-4991-E933-B7C4-89C4A7B64AB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49544C58-8DEE-8861-FF92-12850BB4F88B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49544C58-8DEE-8861-FF92-12850BB4F88B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49544C58-8DEE-8861-FF92-12850BB4F88B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49544C58-8DEE-8861-FF92-12850BB4F88B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0746DD13-D9C8-47E0-8151-5E0ED4F5B18D}
+	EndGlobalSection
+EndGlobal
