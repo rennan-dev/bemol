@@ -22,6 +22,9 @@ services:
       - 5672:5672
 
   estoque-service:
+    build:
+        context: ./codigo_fonte/Estoque
+        dockerfile: Dockerfile
     image: estoqueservice:1.1
     container_name: estoque
     networks:
@@ -35,6 +38,9 @@ services:
         condition: service_started
 
   pedido-service:
+    build:
+      context: ./codigo_fonte/Pedido
+      dockerfile: Dockerfile
     image: pedidoservice:1.1
     container_name: pedido
     networks:
